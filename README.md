@@ -1,5 +1,9 @@
 # 点餐系统
 
+技术点
+
+SpringBoot WebSocket MySQL JPA Redis    
+
 ## 数据库设计
 
 类目表product_category
