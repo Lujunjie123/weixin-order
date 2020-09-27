@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.sell.mapper.ProductCategoryMapper">
+
+    <resultMap id="BaseResult" type="com.example.sell.entity.ProductCategory">
+        <result column="category_id" property="categoryId" jdbcType="INTEGER"/>
+        <result column="category_name" property="categoryName" jdbcType="VARCHAR"/>
+        <result column="category_type" property="categoryType" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="selectByCategoryType" resultMap="BaseResult" parameterType="integer">
+        select *
+        from product_category
+        where category_type = #{category_type,jdbcType=INTEGER}
+    </select>
+</mapper>

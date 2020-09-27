@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 
 @Data
 @Entity
+//@DynamicUpdate
 public class OrderDetail {
 
     @Id

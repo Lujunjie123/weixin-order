@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>订单列表</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>订单id</th>
+                    <th>姓名</th>
+                    <th>手机号</th>
+                    <th>地址</th>
+                    <th>金额</th>
+                    <th>订单状态</th>
+                    <th>支付状态</th>
+                    <th>创建时间</th>
+                    <th colspan="2">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="orderDto:${orderDtoPage.getContent()}">
+                    <td th:text="${orderDto.orderId}"></td>
+                    <td th:text="${orderDto.buyerName}"></td>
+                    <td th:text="${orderDto.buyerPhone}"></td>
+                    <td th:text="${orderDto.buyerAddress}"></td>
+                    <td th:text="${orderDto.orderAmount}"></td>
+                    <td th:text="${orderDto.orderStatusEnum()}"></td>
+                    <td th:text="${orderDto.payStatusEnum()}"></td>
+                    <td th:text="${orderDto.createTime}"></td>
+                    <td><a>详情</a></td>
+                    <td><a>取消</a></td>
+                </tr>
+                </tbody>
+            </table>
+<!--    弹框-->
+            <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                提醒
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            你有新的订单
+                        </div>
+                        <div class="modal-footer">
+                            <button onclick="javascript:document.getElementById('notice').pause()" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button onclick="location.reload()" type="button" class="btn btn-primary">查看新订单</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--    博放音乐-->
+            <audio id="notice" loop="loop">
+                <source th:src="@{/mp3/song.mp3}" type="audio/mpeg"/>
+            </audio>
+
+<!--            <div class="row clearfix">-->
+<!--                <div class="col-md-12 column">-->
+<!--                    <ul class="pagination pull-right">-->
+<!--                        <li><a th:href="@{http://localhost:8080/sell/seller/order/list?page=${pageNum}-1}">上一页</a></li>-->
+<!--                        <li href="#" th:each="pageNum:${#numbers.sequence(0, orderDtoPage.getTotalPages() - 1)}"-->
+<!--                            th:text="${pageNum + 1}">-->
+<!--                        </li>-->
+<!--                        <li><a th:href="@{http://localhost:8080/sell/seller/order/list?page=${pageNum}+1}">下一页</a></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
+<script>
+    let websocket = null;
+    if('WebSocket' in window){
+        websocket = new WebSocket('ws://localhost:8080/sell/webSocket');
+    }else{
+        alert("该浏览器不支持websocket!")
+    }
+
+    websocket.onopen = function (event){
+        websocket.send("客户端向服务端发送消息-----")
+        console.log('建立连接')
+    }
+
+    websocket.onclose = function (event){
+        console.log('连接关闭')
+    }
+
+    websocket.onmessage = function (event){
+        console.log('收到消息'+event.data)
+        //bootstrap模态框写法 modal() //弹窗提醒
+        $("#myModal").modal('show')
+       //播放音乐
+        document.getElementById('notice').play();
+    }
+
+    websocket.onerror = function (event) {
+        alert('websocket通道发生错误！')
+    }
+    //在窗口关闭的时候关闭websocket
+    window.onbeforeunload = function () {
+        websocket.close();
+    }
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

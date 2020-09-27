@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.math.BigDecimal;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -28,16 +25,16 @@ class ProductInfoRepositoryTest {
 
     @Test
     void save(){
-        ProductInfo productInfo = new ProductInfo();
-        productInfo.setCategoryType(1);
-        productInfo.setProductId("123465");
-        productInfo.setProductName("黄金榴莲披萨");
-        productInfo.setProductPrice(new BigDecimal(231.12));
-        productInfo.setProductStatus(0);
-        productInfo.setProductStock(55);
-        productInfo.setProductDescription("美味的披萨");
-        productInfo.setProductIcon("www.xxx.png");
-        ProductInfo save = productInfoRepository.save(productInfo);
-        Assert.assertNotNull(save);
+//        ProductInfo productInfo = new ProductInfo();
+//        productInfo.setCategoryType(1);
+//        productInfo.setProductId("123465");
+//        productInfo.setProductName("黄金榴莲披萨");
+//        productInfo.setProductPrice(new BigDecimal(231.12));
+//        productInfo.setProductStatus(0);
+//        productInfo.setProductStock(55);
+//        productInfo.setProductDescription("美味的披萨");
+//        productInfo.setProductIcon("www.xxx.png");
+//        ProductInfo save = productInfoRepository.save(productInfo);
+//        Assert.assertNotNull(save);
     }
 }

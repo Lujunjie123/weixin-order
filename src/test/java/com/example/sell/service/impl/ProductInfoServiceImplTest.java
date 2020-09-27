@@ -11,13 +11,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ProductInfoServiceImplTest {
 
     @Autowired
@@ -25,7 +22,8 @@ class ProductInfoServiceImplTest {
 
     @Test
     void findOne() {
-        ProductInfo one = productInfoService.findOne("123465");
+        ProductInfo one = productInfoService.findOne("1234650");
+        System.out.println(one);
         Assert.assertEquals("123465",one.getProductId());
     }
 
@@ -46,17 +44,17 @@ class ProductInfoServiceImplTest {
 
     @Test
     void save() {
-        ProductInfo productInfo = new ProductInfo();
-        productInfo.setCategoryType(1);
-        productInfo.setProductId("123467");
-        productInfo.setProductName("歌帝梵冰淇淋");
-        productInfo.setProductPrice(new BigDecimal("50.46"));
-        productInfo.setProductStatus(1);
-        productInfo.setProductStock(45);
-        productInfo.setProductDescription("很丝滑很凉爽");
-        productInfo.setProductIcon("www.xxx.png");
-        ProductInfo save = productInfoService.save(productInfo);
-        Assert.assertNotNull(save);
+//        ProductInfo productInfo = new ProductInfo();
+//        productInfo.setCategoryType(1);
+//        productInfo.setProductId("123467");
+//        productInfo.setProductName("歌帝梵冰淇淋");
+//        productInfo.setProductPrice(new BigDecimal("50.46"));
+//        productInfo.setProductStatus(1);
+//        productInfo.setProductStock(45);
+//        productInfo.setProductDescription("很丝滑很凉爽");
+//        productInfo.setProductIcon("www.xxx.png");
+//        ProductInfo save = productInfoService.save(productInfo);
+//        Assert.assertNotNull(save);
     }
 }
 

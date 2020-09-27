@@ -5,13 +5,17 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Data
 @Entity
 @NoArgsConstructor
-public class ProductInfo {
+//@DynamicUpdate
+public class ProductInfo implements Serializable {
 
+    private static final long serialVersionUID = 3346816224737337404L;
     @Id
     private String productId;
 
@@ -29,6 +33,9 @@ public class ProductInfo {
 
     private Integer categoryType;
 
+    private Date createTime;
+
+    private Date updateTime;
 }
 
 

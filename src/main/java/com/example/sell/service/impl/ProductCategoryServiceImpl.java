@@ -1,6 +1,8 @@
 package com.example.sell.service.impl;
 
 import com.example.sell.entity.ProductCategory;
+import com.example.sell.eumus.ResultEnum;
+import com.example.sell.exception.SellException;
 import com.example.sell.repository.ProductCategoryRepository;
 import com.example.sell.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +19,10 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     @Override
     public ProductCategory findOne(Integer categoryId) {
         Optional<ProductCategory> optional = productCategoryRepository.findById(categoryId);
-        //如果有值返回该值，否则返回一个新对象
-        return optional.orElseGet(ProductCategory::new);
+        if(!optional.isPresent()){
+            throw new SellException(ResultEnum.CATECORY_NOT_EXIST);
+        }
+        return optional.get();
     }
 
     @Override

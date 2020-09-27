@@ -1,14 +1,25 @@
 package com.example.sell.exception;
 
 import com.example.sell.eumus.ResultEnum;
+import lombok.Getter;
 
+@Getter
 public class SellException extends RuntimeException{
 
-    private int code;
+    private Integer code;
 
     public SellException(ResultEnum resultEnum){
         super(resultEnum.getMessage());
         this.code = resultEnum.getCode();
     }
 
+    public SellException(ResultEnum resultEnum,String message) {
+        super(resultEnum.getMessage());
+        this.code = resultEnum.getCode();
+    }
+
+    public SellException(Integer code,String msg){
+        super(msg);
+        this.code = code;
+    }
 }
